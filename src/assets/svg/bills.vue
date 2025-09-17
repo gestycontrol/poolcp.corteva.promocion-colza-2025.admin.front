@@ -1,0 +1,32 @@
+<template>
+    <i :class="{ 'custom-icon': !inline, 'custom-icon__big': big, 'custom-icon__inline': inline }">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" width="20" height="20" fill="currentColor"
+            class="bi bi-bills-alt-fill">
+            <g>
+                <path style="stroke-width: 0px;"
+                    d="M24.56,8.27v-3.23l-2.37.32v-3.35L.61,8.27h-.61v15.73h26v-15.73h-1.44ZM23.13,8.27h-11.78l11.78-1.59v1.59ZM20.76,5.55l-10.55,1.43,10.55-3.06v1.63ZM24.57,22.56H1.43v-12.86h23.13v12.86Z" />
+                <path style="stroke-width: 0px;"
+                    d="M13,20.6c2.46,0,4.47-2,4.47-4.47s-2-4.47-4.47-4.47-4.47,2-4.47,4.47,2,4.47,4.47,4.47ZM13,13.09c1.67,0,3.04,1.36,3.04,3.04s-1.36,3.04-3.04,3.04-3.04-1.36-3.04-3.04,1.36-3.04,3.04-3.04Z" />
+                <path style="stroke-width: 0px;"
+                    d="M7.64,19.72c-.71-1.06-1.09-2.31-1.09-3.59s.38-2.53,1.09-3.59l.75-1.12H2.97v9.41h5.42l-.75-1.12ZM4.4,19.4v-6.55h1.42c-.47,1.02-.71,2.13-.71,3.27s.24,2.25.71,3.27h-1.42Z" />
+                <path style="stroke-width: 0px;"
+                    d="M19.45,16.13c0,1.29-.38,2.53-1.09,3.59l-.75,1.12h5.42v-9.41h-5.42l.75,1.12c.71,1.06,1.09,2.31,1.09,3.59ZM20.18,12.86h1.42v6.55h-1.42c.47-1.02.71-2.13.71-3.27s-.24-2.25-.71-3.27Z" />
+                <rect style="stroke-width: 0px; fill: none;" width="20" height="20" />
+            </g>
+        </svg>
+    </i>
+</template>
+<script>
+export default {
+    props: {
+        big: {
+            type: Boolean,
+            default: false,
+        },
+        inline: {
+            type: Boolean,
+            default: false,
+        }
+    }
+}
+</script>

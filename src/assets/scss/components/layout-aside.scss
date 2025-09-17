@@ -1,0 +1,23 @@
+.custom-layout-aside {
+  line-height: 1.3;
+  @include media-breakpoint-up(lg) {
+    font-size: 13px;
+  }
+
+  // @include media-breakpoint-up(xl) {
+  //   font-size: 16px;
+  // }
+
+  @include media-breakpoint-down(lg) {
+    display: block;
+    white-space: nowrap;
+    overflow-x: scroll;
+    // padding-bottom: 20px;
+    // height: 40px;
+    // overflow-y: hidden;
+
+    .nav-item {
+      display: inline-block;
+    }
+  }
+}

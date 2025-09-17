@@ -1,0 +1,181 @@
+// Override Bootstrap's Sass default variables
+//
+// Nearly all variables in Bootstrap are written with the `!default` flag.
+// This allows you to override the default values of those variables before
+// you import Bootstrap's source Sass files.
+//
+// Overriding the default variable values is the best way to customize your
+// CSS without writing _new_ styles. For example, change you can either change
+// `$body-color` or write more CSS that override's Bootstrap's CSS like so:
+// `body { color: red; }`.
+
+//
+// Bring in Bootstrap
+//
+
+// Option 1
+//
+// Import all of Bootstrap's CSS
+
+// @import "bootstrap/scss/bootstrap";
+
+// Option 2
+//
+// Place variable overrides first, then import just the styles you need. Note that some stylesheets are required no matter what.
+
+// Toggle global options
+$enable-gradients: false;
+$enable-shadows: true;
+$enable-rounded: false;
+
+$offcanvas-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+
+// Customize some defaults
+$body-color: #181e4b;
+$body-bg: #fff;
+$border-radius: 0rem;
+$primary: #69979d;
+$secondary: #e6e3dc;
+$dark: #171c47;
+$success: #607c61;
+
+$modal-backdrop-bg: $body-color;
+$modal-backdrop-opacity: 0.8;
+$modal-transition: transform 0.18s ease-out;
+$modal-content-color: $body-color;
+
+$modal-header-padding-y: 0.5rem;
+
+$offcanvas-horizontal-width: 260px;
+$offcanvas-backdrop-bg: $dark;
+$offcanvas-box-shadow: none;
+$offcanvas-padding-x: 0.5rem;
+$offcanvas-padding-y: 0.75rem;
+
+$font-family-sans-serif:
+  Inter,
+  system-ui,
+  -apple-system,
+  "Segoe UI",
+  Roboto,
+  "Helvetica Neue",
+  "Noto Sans",
+  "Liberation Sans",
+  Arial,
+  sans-serif,
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol",
+  "Noto Color Emoji";
+
+$card-spacer-y: 0.65rem;
+$card-spacer-x: 0.75rem;
+
+$accordion-padding-x: 0.75rem;
+
+// $list-group-item-padding-y: 0.45rem;
+$list-group-item-padding-x: 0.65rem;
+
+// Required
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar"; // Requires nav
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/accordion";
+@import "bootstrap/scss/pagination";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/progress";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/toasts";
+@import "bootstrap/scss/modal"; // Requires transitions
+@import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/popover";
+@import "bootstrap/scss/carousel";
+@import "bootstrap/scss/spinners";
+@import "bootstrap/scss/offcanvas"; // Requires transitions
+@import "bootstrap/scss/placeholders";
+
+// Helpers
+// @import "helpers";
+
+// Usage as a mixin
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.skip-navigation {
+  @include visually-hidden-focusable;
+}
+
+.modal-backdrop {
+  background-color: #181e4b !important;
+}
+
+@media (min-width: 1200px) {
+  .modal-xl,
+  .modal-x2l {
+    --bs-modal-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .modal-xl,
+  .modal-x2l {
+    --bs-modal-width: 1240px;
+  }
+}
+
+@media (min-width: 1500px) {
+  .modal-xl,
+  .modal-x2l {
+    --bs-modal-width: 1340px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .modal-x2l {
+    --bs-modal-width: 1440px;
+  }
+}
+
+@media (min-width: 1700px) {
+  .modal-x2l {
+    --bs-modal-width: 1540px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .modal-x2l {
+    --bs-modal-width: 1640px;
+  }
+}
+
+@media (min-width: 1900px) {
+  .modal-x2l {
+    --bs-modal-width: 1740px;
+  }
+}

@@ -1,0 +1,13 @@
+table.table {
+  font-size: 14px;
+  thead {
+    th {
+      white-space: nowrap;
+
+      .form-check {
+        margin-bottom: 0;
+        min-height: auto;
+      }
+    }
+  }
+}

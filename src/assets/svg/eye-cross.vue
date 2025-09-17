@@ -1,0 +1,30 @@
+<template>
+    <i :class="{ 'custom-icon': !inline, 'custom-icon__big': big, 'custom-icon__inline': inline }">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor">
+            <path d="M14.55707,13.55707A3.00147,3.00147,0,1,1,10.4444,9.4444" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="1.5"></path>
+            <path
+                d="M17.99408,16.99408A9.869,9.869,0,0,1,12,19a9.45321,9.45321,0,0,1-8.554-5.088,4.3215,4.3215,0,0,1,0-3.824A8.90085,8.90085,0,0,1,7.22272,6.22272"
+                fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+            <path
+                d="M20.42377,14.13361c.04016-.076.09234-.14417.13025-.22162a4.3215,4.3215,0,0,0,0-3.824A9.4531,9.4531,0,0,0,12,5c-.22479,0-.4433.03-.66522.04462"
+                fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+            <line x1="21" y1="20" x2="4" y2="3" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="1.5"></line>
+        </svg>
+    </i>
+</template>
+<script>
+export default {
+    props: {
+        big: {
+            type: Boolean,
+            default: false,
+        },
+        inline: {
+            type: Boolean,
+            default: false,
+        }
+    }
+}
+</script>

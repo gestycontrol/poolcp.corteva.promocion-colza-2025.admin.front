@@ -1,0 +1,35 @@
+<template>
+    <i :class="{ 'custom-icon': !inline, 'custom-icon__big': big, 'custom-icon__inline': inline }">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor">
+            <circle cx="16" cy="6" r="4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+            </circle>
+            <line x1="21" y1="11" x2="18.828" y2="8.828" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="1.5"></line>
+            <path d="M15,21h3a3,3,0,0,0,3-3V15" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="1.5"></path>
+            <path d="M3,10V7A3,3,0,0,1,6,4H8" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="1.5">
+            </path>
+            <path d="M3,14.27273V20.5a.5.5,0,0,0,.5.5h8a.5.5,0,0,0,.5-.5V14.27273" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="1.5"></path>
+            <path d="M8.95,21V17.5a.5.5,0,0,0-.5-.5h-2a.5.5,0,0,0-.5.5V21" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="1.5"></path>
+            <path d="M13,15,7.79409,11.21388a.5.5,0,0,0-.58818,0L2,15" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="1.5"></path>
+        </svg>
+    </i>
+</template>
+<script>
+export default {
+    props: {
+        big: {
+            type: Boolean,
+            default: false,
+        },
+        inline: {
+            type: Boolean,
+            default: false,
+        }
+    }
+}
+</script>
