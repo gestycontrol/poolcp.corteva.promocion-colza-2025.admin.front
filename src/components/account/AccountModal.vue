@@ -16,7 +16,16 @@
 
         <div class="row g-2">
             <div class="col-12 col-sm-6">
+                <Field v-model="formData.name" :errorMessage="errorMessages.name" :label="i18n('Name')" :disabled="submitted" :type="readonly ? 'readonly' : 'text'" />
+            </div>
+            <div class="col-12 col-sm-6">
                 <Field v-model="formData.email" :errorMessage="errorMessages.email" :label="i18n('Email')" :disabled="submitted" :required="true" :type="readonly ? 'readonly' : 'email'" />
+            </div>
+            <div class="col-12 col-sm-6">
+                <Field v-model="formData.phone" :errorMessage="errorMessages.phone" :label="i18n('Phone')" :disabled="submitted" :type="readonly ? 'readonly' : 'text'" />
+            </div>
+            <div class="col-12 col-sm-6">
+                <Field v-model="formData.area" :errorMessage="errorMessages.area" :label="i18n('Area')" :disabled="submitted" step="0.01" format="decimal" :type="readonly ? 'readonly' : 'number'" />
             </div>
             <div class="col-12 col-sm-6">
                 <Field v-model="formData.onboarding_step" :errorMessage="errorMessages.onboarding_step" :label="i18n('Onboarding Step')" :disabled="submitted" :required="true" step="1" format="int" :type="readonly ? 'readonly' : 'number'" />
@@ -31,7 +40,7 @@
                 <Field v-model="formData.transfer_details" :errorMessage="errorMessages.transfer_details" :label="i18n('Transfer Details')" :disabled="submitted" :required="true" :type="readonly ? 'readonly' : 'text'" />
             </div>
             <div class="col-12 col-sm-6">
-                <Field v-model="formData.points" :errorMessage="errorMessages.points" :label="i18n('Points')" :disabled="submitted" :required="true" step="1" format="int" :type="readonly ? 'readonly' : 'number'" />
+                <Field v-model="formData.points" :errorMessage="errorMessages.points" :label="i18n('Points')" :disabled="true" :required="true" step="1" format="int" :type="readonly ? 'readonly' : 'number'" />
             </div>
         </div>
 

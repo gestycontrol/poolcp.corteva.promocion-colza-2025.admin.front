@@ -3,6 +3,7 @@
     <DefaultLayout>
       <h1 class="h5 mt-2">
         <span class="small text-muted">{{ i18n('Account') }}</span>
+        {{ account ? account.name : '' }}
       </h1>
 
       <SectionManager sectionType="none">
@@ -23,7 +24,16 @@
             </div>
             <div class="row g-2">
               <div class="col-12 col-sm-6 col-lg-4">
+                <FieldReadonly :value="account.name" :label="i18n('Name')" />
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
                 <FieldReadonly :value="account.email" :label="i18n('Email')" />
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <FieldReadonly :value="account.phone" :label="i18n('Phone')" />
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <FieldReadonly :value="account.area" :label="i18n('Area')" format="decimal" />
               </div>
               <div class="col-12 col-sm-6 col-lg-4">
                 <FieldReadonly :value="account.onboarding_step" :label="i18n('Onboarding Step')" format="int" />
@@ -159,7 +169,7 @@ export default {
         }
 
         this.account = account;
-        this.$root.setPageTitle([].filter(Boolean).join(' ') + ' | ' + this.i18n('Accounts'));
+        this.$root.setPageTitle([account.name].filter(Boolean).join(' ') + ' | ' + this.i18n('Accounts'));
         this.notFound = false;
       }).catch(() => {
         this.notFound = true;

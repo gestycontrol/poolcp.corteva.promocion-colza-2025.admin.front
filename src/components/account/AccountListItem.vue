@@ -5,24 +5,12 @@
       <FieldReadonly :value="account.id" />
     </td>
     <td class="d-block d-lg-table-cell">
+      <span class="small d-lg-none fw-bold" data-no-export>{{ i18n('Name') }}</span>
+      <FieldReadonly :value="account.name" />
+    </td>
+    <td class="d-block d-lg-table-cell">
       <span class="small d-lg-none fw-bold" data-no-export>{{ i18n('Email') }}</span>
       <FieldReadonly :value="account.email" />
-    </td>
-    <td class="d-block d-lg-table-cell">
-      <span class="small d-lg-none fw-bold" data-no-export>{{ i18n('Onboarding Step') }}</span>
-      <FieldReadonly :value="account.onboarding_step" format="int" />
-    </td>
-    <td class="d-block d-lg-table-cell">
-      <span class="small d-lg-none fw-bold" data-no-export>{{ i18n('Transfer Mode') }}</span>
-      <FieldReadonly :value="account.transfer_mode" />
-    </td>
-    <td class="d-block d-lg-table-cell">
-      <span class="small d-lg-none fw-bold" data-no-export>{{ i18n('Transfer Holder') }}</span>
-      <FieldReadonly :value="account.transfer_holder" />
-    </td>
-    <td class="d-block d-lg-table-cell">
-      <span class="small d-lg-none fw-bold" data-no-export>{{ i18n('Transfer Details') }}</span>
-      <FieldReadonly :value="account.transfer_details" />
     </td>
     <td class="d-block d-lg-table-cell">
       <span class="small d-lg-none fw-bold" data-no-export>{{ i18n('Points') }}</span>

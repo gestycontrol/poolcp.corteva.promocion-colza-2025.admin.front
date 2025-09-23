@@ -5,11 +5,8 @@
         <thead>
           <tr class="d-none d-lg-table-row">
             <th class="text-nowrap" scope="col">{{ i18n('Id') }}</th>
+            <th class="text-nowrap" scope="col">{{ i18n('Name') }}</th>
             <th class="text-nowrap" scope="col">{{ i18n('Email') }}</th>
-            <th class="text-nowrap" scope="col">{{ i18n('Onboarding Step') }}</th>
-            <th class="text-nowrap" scope="col">{{ i18n('Transfer Mode') }}</th>
-            <th class="text-nowrap" scope="col">{{ i18n('Transfer Holder') }}</th>
-            <th class="text-nowrap" scope="col">{{ i18n('Transfer Details') }}</th>
             <th class="text-nowrap" scope="col">{{ i18n('Points') }}</th>
             <th class="text-nowrap" scope="col">{{ i18n('Created') }}</th>
             <th data-no-export scope="col" style="min-width: 48px">&nbsp;</th>
@@ -19,8 +16,8 @@
           <AccountListItem v-for="account in accounts"
             :account="account" :key="account.id" 
             @deleted="$emit('deleted', $event)" @updated="$emit('updated', $event)" @updating="$emit('updating', $event)" />
-          <EmptyListItem v-if="!accounts || accounts.length == 0" :loading="loading" :colspan="9" />
-          <LazyLoadListItem v-if="!loading && (lazyLoad || autoLazyLoad)" :autoLazyLoad="autoLazyLoad" :colspan="9"
+          <EmptyListItem v-if="!accounts || accounts.length == 0" :loading="loading" :colspan="6" />
+          <LazyLoadListItem v-if="!loading && (lazyLoad || autoLazyLoad)" :autoLazyLoad="autoLazyLoad" :colspan="6"
             @next="$emit('next', $event)" />
         </tbody>
       </table>

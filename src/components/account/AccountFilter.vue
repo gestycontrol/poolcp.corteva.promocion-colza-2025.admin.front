@@ -19,6 +19,9 @@
                 <Field type="email" v-model="filters.email" :label="i18n('Email')" />
             </div>
             <div class="col-12 col-sm-6 col-lg-4">
+                <Field type="text" v-model="filters.name" :label="i18n('Name')" />
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
                 <Field type="text" v-model="filters.transfer_mode" :label="i18n('Transfer Mode')" />
             </div>
             <div class="col-12 col-sm-6 col-lg-4">
