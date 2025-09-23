@@ -52,6 +52,9 @@ export default {
                 return {};
             },
         },
+        downloadAction: {
+            type: Function,
+        },
         navigation: Boolean,
         buttons: {
             type: Boolean,
@@ -85,7 +88,11 @@ export default {
             }
         },
         download() {
-            window.open(this.image.url);
+            if (this.downloadAction) {
+                this.downloadAction();
+            } else {
+                window.open(this.image.url);
+            }
         },
         show() {
             this.$refs['modal'].show({

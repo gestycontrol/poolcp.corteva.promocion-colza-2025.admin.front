@@ -1,10 +1,10 @@
 <template>
     <div :id="id">
-        <div class="row g-2" v-if="!(open && canDeployDetail) || isCoordinatePicker">
+        <div class="row g-2" v-show="!(open && canDeployDetail) || isCoordinatePicker">
             <div class="col">
                 <TextField :smallLabel="true" :placeholder="i18n('Street And Number')" :label="label"
                     :pseudoRequired="pseudoRequired || required" :required="required" :disabled="disabled"
-                    :customAutofocus="customAutofocus" :readonly="readonly" ref="address" v-model="value.formatted"
+                    :customAutofocus="customAutofocus" :readonly="readonly" ref="address" v-model="valueFormatted"
                     :errorMessage="errorMessages.formatted ? errorMessages.formatted : errorMessage">
                     <button class="btn btn-outline-secondary" type="button" @click="toggleOpen"
                         v-if="canDeployDetail && !isCoordinatePicker">
@@ -177,6 +177,16 @@ export default {
         },
     },
     computed: {
+        valueFormatted: {
+            get() {
+                return this.value?.formatted || '';
+            },
+            set(newValue) {
+                if (this.value) {
+                    this.value.formatted = newValue;
+                }
+            }
+        },
         computedAutocompleteTypes() {
             let types = null;
 
@@ -196,7 +206,7 @@ export default {
             return this.isCoordinatePicker;
         },
         canDeployDetail() {
-            return (this.value.is_geocoded
+            return (this.value?.is_geocoded
                 || this.allowManualInput);
         },
         isComplete() {
@@ -243,13 +253,11 @@ export default {
         'value.country'() {
             this.setFormattedAddress();
         },
-        'value.formatted'() {
-            if (this.isCoordinatePicker) return;
-            this.setFormattedAddress();
-        },
         value() {
             if (this.value === null ||
-                this.value === undefined) this.value = {};
+                this.value === undefined) {
+                this.value = {};
+            }
 
             if (!this.value.coordinates) {
                 this.value.coordinates = {};
@@ -292,12 +300,13 @@ export default {
             }, 200);
         },
         setAutocomplete() {
-            if (this.isAutocompleteSet || !this.$refs['address'] || !this.isAutocompleteEngineAvailable()) {
+            if (this.isAutocompleteSet
+                || !this.$refs['address']
+                || !this.isAutocompleteEngineAvailable()) {
                 return this.delayAutocomplete();
             }
 
             this.isAutocompleteSet = true;
-
             this.autocompleteEngine = new google.maps.places.Autocomplete(
                 document.getElementById(this.$refs['address'].getId()),
                 { types: this.computedAutocompleteTypes }

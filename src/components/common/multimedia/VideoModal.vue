@@ -4,7 +4,8 @@
             <slot name="title">{{ video.name }}</slot>
         </template>
         <VideoPlayer :video="video" :navigation="navigation" @started="started" @ended="ended" @paused="paused"
-            @enterfullscreen="enterfullscreen" @exitfullscreen="exitfullscreen" @next="$emit('next')" @prev="$emit('prev')" />
+            @enterfullscreen="enterfullscreen" @exitfullscreen="exitfullscreen" @next="$emit('next')"
+            @prev="$emit('prev')" />
         <template #footer>
             <div class="row">
                 <div class="col text-start">
@@ -37,6 +38,9 @@ export default {
                 return {};
             },
         },
+        downloadAction: {
+            type: Function,
+        },
         navigation: Boolean,
     },
     emits: [
@@ -60,12 +64,16 @@ export default {
         inIframe() {
             try {
                 return window.self !== window.top;
-            } catch (e) {
+            } catch {
                 return true;
             }
         },
         download() {
-            window.open(this.video.url);
+            if (this.downloadAction) {
+                this.downloadAction();
+            } else {
+                window.open(this.video.url);
+            }
         },
         show() {
             this.$refs['modal'].show({

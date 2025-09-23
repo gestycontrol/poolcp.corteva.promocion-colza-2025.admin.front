@@ -7,8 +7,9 @@
                         class="form-control" :placeholder="fallbackPlaceholder" @focus="showDropdown = true"
                         @keydown="handleKeydown" @input="handleInput" @blur="onBlurAutocomplete" autocomplete="off"
                         :required="required" :disabled="disabled || readonly" />
-                    <label v-if="label && formFloating" :for="id">{{ label + (required || pseudoRequired ? '*' : '')
-                        }}</label>
+                    <label v-if="label && formFloating" :for="id">
+                        {{ label + (required || pseudoRequired ? '*' : '') }}
+                    </label>
                     <teleport to="body">
                         <ul v-if="showDropdown && filteredOptions.length" class="dropdown-menu show"
                             :style="computedDropdownPosition">
@@ -49,8 +50,9 @@
                             </option>
                         </template>
                     </select>
-                    <label v-if="label && formFloating" :for="id">{{ label + (required || pseudoRequired ? '*' : '')
-                        }}</label>
+                    <label v-if="label && formFloating" :for="id">
+                        {{ label + (required || pseudoRequired ? '*' : '') }}
+                    </label>
                 </template>
                 <div class="text-danger small ms-1 mt-1" v-if="errorMessage">
                     {{ errorMessage }}
@@ -216,13 +218,13 @@ export default {
         filteredOptions() {
             if (!this.searchQuery) return this.options;
 
-            const normalize = (s) => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            const originalQuery = normalize(this.searchQuery.trim());
-            const removeSpaces = !this.searchQuery.includes(" ");
+            const normalize = (s) => s.toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const originalQuery = normalize((this.searchQuery || '').toString().trim());
+            const removeSpaces = !(this.searchQuery || '').toString().includes(" ");
             const query = removeSpaces ? originalQuery.replace(/\s+/g, "") : originalQuery;
             return this.options
                 .map(option => {
-                    let name = normalize(option.name);
+                    let name = normalize((option.name || '').toString());
 
                     if (removeSpaces) {
                         name = name.replace(/\s+/g, "");
@@ -248,7 +250,7 @@ export default {
                 .filter(item => item.category < 4)
                 .sort((a, b) => {
                     if (a.category === b.category) {
-                        return a.option.name.localeCompare(b.option.name);
+                        return a.option.name.toString().localeCompare(b.option.name);
                     }
 
                     return a.category - b.category;
@@ -398,43 +400,52 @@ export default {
                 this.highlightedIndex = -1;
             }
         },
+        handleArrowDownKeyDown(event) {
+            event.preventDefault();
+
+            if (!this.showDropdown) {
+                this.showDropdown = true;
+                this.highlightedIndex = 0;
+            } else if (this.highlightedIndex < this.filteredOptions.length - 1) {
+                this.highlightedIndex++;
+            }
+
+            this.scrollHighlightedOptionIntoView();
+        },
+        handleArrowUpKeyDown(event) {
+            event.preventDefault();
+
+            if (this.showDropdown && this.highlightedIndex > 0) {
+                this.highlightedIndex--;
+            }
+
+            this.scrollHighlightedOptionIntoView();
+        },
+        handleEnterKeyDown(event) {
+            if (this.showDropdown && this.filteredOptions.length > 0) {
+                event.preventDefault();
+
+                let index = this.highlightedIndex;
+
+                if (index === -1) {
+                    index = 0;
+                }
+
+                this.selectOption(this.filteredOptions[index]);
+                this.highlightedIndex = -1;
+            }
+        },
         handleKeydown(event) {
             if (!this.searchModeActive) return;
 
             const key = event.key;
 
             if (key === 'ArrowDown') {
-                event.preventDefault();
-
-                if (!this.showDropdown) {
-                    this.showDropdown = true;
-                    this.highlightedIndex = 0;
-                } else if (this.highlightedIndex < this.filteredOptions.length - 1) {
-                    this.highlightedIndex++;
-                }
-
-                this.scrollHighlightedOptionIntoView();
+                this.handleArrowDownKeyDown(event);
             } else if (key === 'ArrowUp') {
-                event.preventDefault();
-
-                if (this.showDropdown && this.highlightedIndex > 0) {
-                    this.highlightedIndex--;
-                }
-
-                this.scrollHighlightedOptionIntoView();
+                this.handleArrowUpKeyDown(event);
             } else if (key === 'Enter') {
-                if (this.showDropdown && this.filteredOptions.length > 0) {
-                    event.preventDefault();
-
-                    let index = this.highlightedIndex;
-
-                    if (index === -1) {
-                        index = 0;
-                    }
-
-                    this.selectOption(this.filteredOptions[index]);
-                    this.highlightedIndex = -1;
-                }
+                this.handleEnterKeyDown(event);
             }
         },
         selectOption(option) {
@@ -447,7 +458,7 @@ export default {
             setTimeout(() => {
                 if (!this.searchModeActive) return;
 
-                if (!(this.searchQuery || '').trim()) {
+                if (!(this.searchQuery || '').toString().trim()) {
                     this.value = null;
                     this.showDropdown = false;
                     this.$emit('update:modelValue', this.value);

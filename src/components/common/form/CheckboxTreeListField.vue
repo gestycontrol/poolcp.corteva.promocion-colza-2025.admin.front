@@ -66,12 +66,19 @@ export default {
             type: Function,
             default: extractKeyFromObject,
         },
+        startCollapsed: {
+            type: Boolean,
+            default: false,
+        },
     },
     emits: ['update:item'],
     data() {
         return {
             isCollapsed: false,
         };
+    },
+    created() {
+        this.isCollapsed = this.startCollapsed;
     },
     computed: {
         itemKey() {

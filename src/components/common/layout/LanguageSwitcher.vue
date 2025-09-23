@@ -284,14 +284,18 @@ export default {
         }
 
         .language-option {
-            color: #fff !important;         &:hover {
+            color: #fff !important;
+
+            &:hover {
                 background-color: #333 !important;
                 color: #fff !important;
             }
+
             &.active {
                 background-color: #444 !important;
                 color: #fff !important;
             }
+
             .language-native {
                 color: #bbb !important;
             }

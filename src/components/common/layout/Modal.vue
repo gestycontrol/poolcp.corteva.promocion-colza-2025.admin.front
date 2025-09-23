@@ -12,8 +12,8 @@
                             @click="hideOrDelegate"></button>
                     </div>
                     <div :class="`modal-body ${bodyClass}`" v-if="showBody">
-                        <form action="javascript:void(0)" @submit="submit">
-                            <div class="container-fluid pe-0 ps-0">
+                        <form action="javascript:void(0)" @submit="submit" :class="formClass">
+                            <div class="container-fluid pe-0 ps-0" :class="formContainerClass">
                                 <slot></slot>
                             </div>
                             <input type="submit" name="submit" value="submit" class="visually-hidden"
@@ -82,6 +82,14 @@ export default {
             default: true,
         },
         modalBackdropClass: {
+            type: String,
+            default: '',
+        },
+        formClass: {
+            type: String,
+            default: '',
+        },
+        formContainerClass: {
             type: String,
             default: '',
         },

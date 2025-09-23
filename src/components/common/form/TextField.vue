@@ -131,6 +131,15 @@ export default {
                     attributes[k] === 'false') delete attributes[k];
             });
 
+            // Avoid unintended validation failure for relative URLs
+            if (attributes.type === 'url'
+                && this.value
+                && (this.value.startsWith('#')
+                    || this.value.startsWith('/'))
+            ) {
+                attributes.type = 'text';
+            }
+
             return attributes;
         },
     },

@@ -465,6 +465,7 @@ export default {
 }
 
 .inline-multiple.disabled {
-    background-color: #e9ecef;   opacity: 1;
+    background-color: #e9ecef;
+    opacity: 1;
 }
 </style>

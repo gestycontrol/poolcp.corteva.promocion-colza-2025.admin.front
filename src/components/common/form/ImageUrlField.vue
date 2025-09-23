@@ -9,7 +9,7 @@
         <div class="input-group" v-if="!value || value.length < 2000">
             <div :class="{ 'form-floating': true, 'focus': smallLabel, [cssClass]: true }">
                 <input v-bind="inputAttributes" v-model="value" ref="input" @blur="$emit('blur')"
-                    @focus="$emit('focus')">
+                    @focus="$emit('focus')" @paste="onPaste">
                 <label :for="id" v-if="label">
                     <Tooltip :title="tooltip" v-if="tooltip">
                         {{ label + (required || pseudoRequired ? '*' : '') }}
@@ -198,6 +198,45 @@ export default {
         },
     },
     methods: {
+        async onPaste(event) {
+            if (this.processing || this.readonly || this.disabled) return;
+
+            const clipboardData = event.clipboardData || window.clipboardData;
+            if (!clipboardData) return;
+
+            const items = clipboardData.items || [];
+            let file = null;
+
+            for (const item of items) {
+                if ((item?.type || '').startsWith('image')) {
+                    file = item.getAsFile?.() || null;
+                    break;
+                }
+            }
+
+            if (!file && clipboardData.files && clipboardData.files.length > 0) {
+                const maybeFile = clipboardData.files[0];
+
+                if (maybeFile && maybeFile.type && maybeFile.type.indexOf('image') === 0) {
+                    file = maybeFile;
+                }
+            }
+
+            if (!file) return;
+
+            event.preventDefault();
+            this.processing = true;
+
+            try {
+                const fileInfo = await this.getFileInformation(file);
+                if (!fileInfo) return;
+
+                const resizedImage = await this.handleImageResize(fileInfo);
+                this.value = await this.convertToBase64(resizedImage);
+            } finally {
+                this.processing = false;
+            }
+        },
         async inputFileChange() {
             if (this.processing) return;
             if (!this.$refs['fileInput'] || !this.$refs['fileInput'].files || this.$refs['fileInput'].files.length === 0) {
